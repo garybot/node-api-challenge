@@ -40,13 +40,24 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Middleware and more middleware. A lightweight server, and routing capabilities.
+
 - [ ] Describe Middleware?
+
+Middleware provides a way to extend base functionality. 
 
 - [ ] Describe a Resource?
 
+A resource is some file or other data on a server that users might access through your application.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+Response codes, specifically those in the 200 range.
+
 - [ ] How can we partition our application into sub-applications?
+
+Server-side routing.
+
 
 ## Minimum Viable Product
 
