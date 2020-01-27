@@ -1,7 +1,10 @@
 const express = require('express');
 const db = require('./data/helpers/projectModel.js');
+const actionsRouter = require('./actionRouter.js');
 
 const router = express.Router();
+
+router.use('/:id/actions', validateProjectId, actionsRouter);
 
 router.get('/', async (req, res) => {
   try {
@@ -14,15 +17,6 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', validateProjectId, async (req, res) => {
   res.status(200).json(req.project);
-});
-
-router.get('/:id/actions', validateProjectId, async (req, res) => {
-  try {
-    const actions = await db.getProjectActions(req.params.id);
-    res.status(200).json(actions);
-  } catch (err) {
-    res.status(500).json({ message: "Failed to retrieve actions for that project", error: err });
-  }
 });
 
 router.post('/', validateProjectData, async (req, res) => {
@@ -57,6 +51,7 @@ async function validateProjectId(req, res, next) {
     const project = await db.get(req.params.id);
     if (project) {
       req.project = project;
+      req.project_id = req.params.id;
       next();
     } else {
       res.status(404).json({ message: "Project with that ID does not exist." });
