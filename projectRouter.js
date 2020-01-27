@@ -16,6 +16,15 @@ router.get('/:id', validateProjectId, async (req, res) => {
   res.status(200).json(req.project);
 });
 
+router.get('/:id/actions', validateProjectId, async (req, res) => {
+  try {
+    const actions = await db.getProjectActions(req.params.id);
+    res.status(200).json(actions);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to retrieve actions for that project", error: err });
+  }
+});
+
 router.post('/', validateProjectData, async (req, res) => {
   try {
     const project = await db.insert(req.body);
