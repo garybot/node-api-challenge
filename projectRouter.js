@@ -43,7 +43,6 @@ router.put('/:id', validateProjectId, validateProjectData, async (req, res) => {
   }
 });
 
-
 router.delete('/:id', validateProjectId, async (req, res) => {
   try {
    await db.remove(req.params.id);
@@ -52,7 +51,6 @@ router.delete('/:id', validateProjectId, async (req, res) => {
     res.status(500).json({ message: "Failed to remove project." });
   }
 });
-
 
 async function validateProjectId(req, res, next) {
   try {
